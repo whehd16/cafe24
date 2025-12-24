@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 기본 스타일 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 버튼 공통 스타일 */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-black text-white hover:bg-gray-800;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+}
+
+/* 카드 스타일 */
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+/* 그리드 레이아웃 */
+.product-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+}
+
+/* 로고 폰트 - 키치한 스타일 */
+.logo-font {
+  font-family: 'Pacifico', cursive;
+}
+
+/* 물감 이미지 애니메이션 */
+.paint-image-container {
+  position: relative;
+  clip-path: inset(0 100% 0 0);
+  animation: revealPaint 1.5s ease-out 0.3s forwards;
+}
+
+.paint-image {
+  transform: rotate(-70deg);
+  /* #84B067 피스타치오 색상으로 변환 - grayscale 후 sepia로 색상 입히기 */
+  filter: grayscale(100%) sepia(100%) hue-rotate(60deg) saturate(150%) brightness(0.85);
+}
+
+@keyframes revealPaint {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
