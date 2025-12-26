@@ -61,7 +61,7 @@ export default function ProductPage() {
 
   if (loading) {
     return (
-      <div className="text-center py-12">
+      <div className="pt-24 text-center py-12">
         <p>로딩 중...</p>
       </div>
     );
@@ -69,14 +69,15 @@ export default function ProductPage() {
 
   if (error || !product) {
     return (
-      <div className="text-center py-12">
+      <div className="pt-24 text-center py-12">
         <p className="text-red-500">{error || '상품을 찾을 수 없습니다.'}</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="pt-24 px-6 min-h-screen bg-white dark:bg-gray-900">
+      <div className="max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* 상품 이미지 */}
         <div className="aspect-square relative bg-gray-100 rounded-lg overflow-hidden">
@@ -172,6 +173,7 @@ export default function ProductPage() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

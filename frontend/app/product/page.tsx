@@ -24,6 +24,20 @@ const categoryMenu = [
       { label: 'POCKETS', cafe24Id: 32 },
     ],
   },
+  {
+    id: 'clothes',
+    label: 'CLOTHES',
+    cafe24Id: 26,
+    subcategories: [
+      { label: 'ALL', cafe24Id: 26 },
+      { label: 'APRON', cafe24Id: 44 },
+    ],
+  },
+  {
+    id: 'etcs',
+    label: 'ETCS',
+    cafe24Id: 28,
+  },
 ];
 
 /**

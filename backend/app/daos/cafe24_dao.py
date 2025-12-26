@@ -182,8 +182,11 @@ class Cafe24DAO:
     ) -> dict:
         """상품 목록 조회"""
         params = {"limit": limit, "offset": offset}
+
+        # 카테고리 필터링은 category 파라미터 사용
         if category_no:
-            params["category_no"] = category_no
+            params["category"] = category_no
+            print(f"[DEBUG] 카테고리 {category_no} 상품 조회, params: {params}")
 
         response = await self._request_with_retry(
             "GET",

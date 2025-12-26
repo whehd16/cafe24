@@ -117,30 +117,67 @@ class ProductService:
             category_no=cafe24_product.get("category", [{}])[0].get("category_no") if cafe24_product.get("category") and len(cafe24_product.get("category", [])) > 0 else None,
         )
 
+    async def _get_child_category_ids(self, parent_category_no: int) -> list[int]:
+        """부모 카테고리의 모든 하위 카테고리 ID 조회"""
+        response = await self.cafe24.get_categories()
+        categories = response.get("categories", [])
+
+        child_ids = []
+        for cat in categories:
+            if cat.get("parent_category_no") == parent_category_no:
+                child_ids.append(cat.get("category_no"))
+
+        return child_ids
+
     async def get_products(
         self,
         page: int = 1,
         limit: int = 10,
         category_no: Optional[int] = None,
+        include_children: bool = True,
     ) -> ProductListResponse:
         """상품 목록 조회"""
         offset = (page - 1) * limit
 
-        # 카페24 API 호출
-        response = await self.cafe24.get_products(
-            limit=limit,
-            offset=offset,
-            category_no=category_no,
-        )
+        all_products = []
+        seen_product_ids = set()
 
-        # 데이터 변환
-        products = [
-            self._transform_product(p) for p in response.get("products", [])
-        ]
+        if category_no and include_children:
+            # 대분류 + 하위 카테고리 모두 조회
+            category_ids = [category_no]
+            child_ids = await self._get_child_category_ids(category_no)
+            category_ids.extend(child_ids)
 
-        # 페이지네이션 정보
-        total = response.get("count", len(products))
-        has_next = offset + limit < total
+            print(f"[DEBUG] 카테고리 {category_no} + 하위 카테고리 {child_ids} 조회")
+
+            for cat_id in category_ids:
+                response = await self.cafe24.get_products(
+                    limit=100,  # 각 카테고리에서 충분히 가져오기
+                    offset=0,
+                    category_no=cat_id,
+                )
+                for p in response.get("products", []):
+                    product_no = p.get("product_no")
+                    if product_no not in seen_product_ids:
+                        seen_product_ids.add(product_no)
+                        all_products.append(self._transform_product(p))
+
+            # 페이지네이션 적용
+            total = len(all_products)
+            products = all_products[offset:offset + limit]
+            has_next = offset + limit < total
+        else:
+            # 카테고리 없거나 하위 포함 안 함
+            response = await self.cafe24.get_products(
+                limit=limit,
+                offset=offset,
+                category_no=category_no,
+            )
+            products = [
+                self._transform_product(p) for p in response.get("products", [])
+            ]
+            total = response.get("count", len(products))
+            has_next = offset + limit < total
 
         return ProductListResponse(
             products=products,
