@@ -167,9 +167,10 @@ export default function ProductPage() {
           {product.description && (
             <div className="mt-8 pt-8 border-t border-gray-200">
               <h2 className="text-lg font-bold mb-4">상품 설명</h2>
-              <p className="text-gray-600 whitespace-pre-wrap">
-                {product.description}
-              </p>
+              <div
+                className="text-gray-600 prose prose-sm max-w-none dark:prose-invert"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
             </div>
           )}
         </div>

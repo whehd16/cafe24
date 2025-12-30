@@ -38,7 +38,7 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                className="p-2 text-[#84B067] hover:text-[#6a9550] hover:bg-[#84B067]/10 rounded-lg transition-colors"
                 aria-label="메뉴 열기"
               >
                 <svg
@@ -96,7 +96,7 @@ export default function Header() {
             {/* 다크모드 토글 */}
             <button
               onClick={toggleTheme}
-              className="p-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="p-2 text-[#84B067] hover:text-[#6a9550] hover:bg-[#84B067]/10 rounded-lg transition-colors"
               aria-label="테마 변경"
             >
               {theme === 'light' ? (
@@ -135,7 +135,7 @@ export default function Header() {
             {/* Login 아이콘 */}
             <Link
               href="/login"
-              className="p-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="p-2 text-[#84B067] hover:text-[#6a9550] hover:bg-[#84B067]/10 rounded-lg transition-colors"
               aria-label="로그인"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,7 +151,7 @@ export default function Header() {
             {/* My Page 아이콘 */}
             <Link
               href="/mypage"
-              className="p-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="p-2 text-[#84B067] hover:text-[#6a9550] hover:bg-[#84B067]/10 rounded-lg transition-colors"
               aria-label="마이페이지"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,7 +167,7 @@ export default function Header() {
             {/* Cart 아이콘 */}
             <Link
               href="/cart"
-              className="relative p-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="relative p-2 text-[#84B067] hover:text-[#6a9550] hover:bg-[#84B067]/10 rounded-lg transition-colors"
               aria-label="장바구니"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
